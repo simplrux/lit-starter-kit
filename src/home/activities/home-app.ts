@@ -26,11 +26,13 @@ export class HomeApp extends CtLit {
 	@property({ type: Array }) msgs: Message[] = [];
 
 
+
 	constructor() {
 		super();
 		this.initFirebase();
 		this.focusInput();
 	}
+
 
 	initFirebase() {
 		const firebaseConfig = {
@@ -75,6 +77,7 @@ export class HomeApp extends CtLit {
 		scroller.scrollTop = scroller.scrollHeight;
 	}
 
+
 	private async read() {
 		const q = firebase.query(collection(this.db, "chat"), firebase.orderBy('time', 'desc'), limit(1));
 		this.unsubscribe = onSnapshot(q, (querySnapshot: DocumentData) => {
@@ -111,9 +114,13 @@ export class HomeApp extends CtLit {
 	}
 
 	private async checkIfAnswered(data: Message) {
+
 		const q = collection(this.db, "chat");
+
 		const querySnapshot = await getDocs(q);
+
 		const possibleAnsweres = querySnapshot.docs.filter((doc: DocumentData) => this.validate(doc.data(), data));
+
 		if (possibleAnsweres.length > 0) {
 			const docData = possibleAnsweres[0].data() as Message;
 			this.requestUpdate();
@@ -127,6 +134,7 @@ export class HomeApp extends CtLit {
 				this.scrollToBottom();
 			}, 500);
 		}
+
 	}
 
 	validate(msg1: Message, msg2: Message) {
@@ -193,7 +201,7 @@ export class HomeApp extends CtLit {
 					<span>				${this.convertTimestamp(msg.time)}
 					</span>
 				</span>
-					<img src="assets/${ifDefined(msg.gifUrl)}">
+					<img src="src/assets/${ifDefined(msg.gifUrl)}">
 					<span>
 						${msg.msg}
 					</span>
