@@ -25,7 +25,7 @@ const copyConfig: CopyOptions = {
 	targets: [
 		{ src: 'node_modules/@webcomponents', dest: 'dist/node_modules' },
 		{ src: 'public/index.universal.html', dest: 'dist', rename: 'index.html' },
-		{ src: 'res', dest: 'dist' }
+		{ src: 'res', dest: 'docs' }
 	]
 };
 let development = process.env.NODE_ENV != 'production';
