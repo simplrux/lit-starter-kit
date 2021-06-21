@@ -46,7 +46,6 @@ export class LitApp extends CtLit {
 	render() {
 		return html`
 			<main>
-				<header>LitElement Starter App</header>
 				<app-router></app-router>
 			</main>
 		`;
