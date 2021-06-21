@@ -23,9 +23,9 @@ const babelConfig: RollupBabelInputPluginOptions = {
 const copyConfig: CopyOptions = {
 	hook: 'closeBundle',
 	targets: [
-		{ src: 'node_modules/@webcomponents', dest: 'dist/node_modules' },
-		{ src: 'public/index.universal.html', dest: 'dist', rename: 'index.html' },
-		{ src: '', dest: 'docs' }
+		{ src: 'node_modules/@webcomponents', dest: 'docs/node_modules' },
+		{ src: 'public/index.universal.html', dest: 'docs', rename: 'index.html' },
+		{ src: 'res', dest: 'docs' }
 	]
 };
 let development = process.env.NODE_ENV != 'production';
@@ -57,7 +57,7 @@ export default (opts: any) => {
 					format: 'systemjs',
 					chunkFileNames: `${process.env.NODE_ENV == 'development' ? '[name].' : 'c.'}[hash].js`,
 					entryFileNames: '[name].bundle.js',
-					dir: 'dist'
+					dir: 'docs'
 				},
 				plugins: [
 					// Minify HTML template literals
@@ -65,7 +65,7 @@ export default (opts: any) => {
 					babel(babelConfig),
 					// Resolve bare module specifiers to relative paths
 					resolve(),
-					// Copy res to dist folder
+					// Copy res to docs folder
 					copy(copyConfig),
 					// Minify JS
 					terser({
